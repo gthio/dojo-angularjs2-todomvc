@@ -13,7 +13,7 @@
     </label>
     <ul class="todo-list">
       <li *ngFor="#todo of todoStore.todos">
-        <input class="toggle" type="checkbox">
+        <input class="toggle" type="checkbox" (click)="toggleCompletion(todo)" [checked]="todo.completed">
         <div class="view">
           <label>
             {{todo.title}}
@@ -27,7 +27,7 @@
   
   <footer class="footer" *ngIf="todoStore.todos.length > 0">
     <span class="todo-count">
-      
+      {{todoStore.getRemaining().length}} item(s) left
     </span>
     <ul class="filters">
       <li>

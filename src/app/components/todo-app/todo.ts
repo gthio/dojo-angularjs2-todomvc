@@ -1,9 +1,8 @@
 export class todo{
 
-  completed: Boolean;
-
   constructor(title: String){
     this._title = title.trim();
+    this._completed = false;
   }
 
   private _title: String;
@@ -12,6 +11,13 @@ export class todo{
   }
   set title(value: String){
     this._title = value.trim();
-    this.completed = false;
   }
+  
+  private _completed: Boolean;
+  get completed() {
+    return this._completed;
+  }
+  set completed(value: Boolean){
+    this._completed = value;
+  }  
 }

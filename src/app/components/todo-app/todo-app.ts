@@ -34,4 +34,8 @@ export class ToDoApp {
   removeCompleted(){
     this.todoStore.removeCompleted();
   }
+  
+  toggleCompletion(todo: todo){
+    this.todoStore.toggleCompletion(todo);
+  }
 }

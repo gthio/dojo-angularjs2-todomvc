@@ -22,6 +22,14 @@ export class todoStore{
     this.todos = this.getFilteredTodos(true);
   }
   
+  toggleCompletion(todo: todo){
+    todo.completed = !todo.completed;
+  }
+  
+  getRemaining(){
+    return this.getFilteredTodos(false);
+  }
+  
   private getFilteredTodos(completed: Boolean){
     return this.todos
       .filter((todo: todo) => todo.completed == completed);
