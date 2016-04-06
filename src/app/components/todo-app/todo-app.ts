@@ -1,5 +1,7 @@
 import {Component} from 'angular2/core';
 import {Http} from 'angular2/http';
+import {todo} from './todo';
+import {todoStore} from './todoStore';
 
 @Component({
   selector: 'mainApp',
@@ -11,7 +13,25 @@ import {Http} from 'angular2/http';
 })
 export class ToDoApp {
 
-  constructor() {
-  }
+  todoStore: todoStore;
+  newText = '';
 
+  constructor(todoStore: todoStore) {
+    this.todoStore = todoStore;
+  }
+  
+  addTodo(){
+    if (this.newText.trim().length > 0){
+      this.todoStore.add(this.newText);
+      this.newText = '';
+    }
+  }
+  
+  remove(todo: todo){
+    this.todoStore.remove(todo);
+  }
+  
+  removeCompleted(){
+    this.todoStore.removeCompleted();
+  }
 }
