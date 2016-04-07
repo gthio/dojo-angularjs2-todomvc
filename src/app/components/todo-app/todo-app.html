@@ -3,24 +3,32 @@
     <h1>
       todos
     </h1>
-    <input class="new-todo" placeholder="What needs to be done?" autofocus [(ngModel)]="newText" (keyup.enter)="addTodo()">
+    <input class="new-todo" placeholder="What needs to be done?" autofocus 
+      [(ngModel)]="newText" 
+      (keyup.enter)="addTodo()">
   </header>
   
   <section class="main" *ngIf="todoStore.todos.length > 0">
-    <input class="toggle-all" type="checkbox" *ngIf="todoStore.todos.length > 0" #toggleall [checked]="todoStore.allCompleted()" (click)="todoStore.setAllTo(toggleall.checked)">
+    <input #toggleall class="toggle-all" type="checkbox" *ngIf="todoStore.todos.length > 0" 
+      [checked]="todoStore.allCompleted()" 
+      (click)="todoStore.setAllTo(toggleall.checked)">
+
     <label for="toggle-all">
       Mark all as complete
     </label>
     <ul class="todo-list">
       <li *ngFor="#todo of todoStore.todos" [class.completed]="todo.completed" [class.editing]="todo.editing">
         <div class="view">
-          <input class="toggle" type="checkbox" [checked]="todo.completed" (click)="toggleCompletion(todo)" >    
+          <input class="toggle" type="checkbox" [checked]="todo.completed" 
+            (click)="toggleCompletion(todo)" >    
+          
           <label (dblclick)="editTodo(todo)">
             {{todo.title}}
           </label>
-          <button class="destroy" (click)="remove(todo)"><button>
+          <button class="destroy" (click)="remove(todo)"></button>
         </div>
-        <input #editedtodo class="edit" *ngIf="todo.editing" [value]="todo.title"  
+        <input #editedtodo class="edit" *ngIf="todo.editing" 
+          [value]="todo.title"  
           (blur)="stopEditing(todo, editedtodo.value)" 
           (keyup.enter)="updateEditing(todo, editedtodo.value)" 
           (keyup.escape)="cancelEditing(todo)">
