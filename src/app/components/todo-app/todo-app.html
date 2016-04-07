@@ -7,7 +7,7 @@
   </header>
   
   <section class="main" *ngIf="todoStore.todos.length > 0">
-    <input class="toggle-all" type="checkbox">
+    <input class="toggle-all" type="checkbox" *ngIf="todoStore.todos.length > 0" #toggleall [checked]="todoStore.allCompleted()" (click)="todoStore.setAllTo(toggleall.checked)">
     <label for="toggle-all">
       Mark all as complete
     </label>

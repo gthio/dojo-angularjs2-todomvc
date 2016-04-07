@@ -34,6 +34,14 @@ export class todoStore{
     return this.getFilteredTodos(true);
   }
   
+  allCompleted(){
+    return this.todos.length == this.getFilteredTodos(true).length;
+  }
+  
+  setAllTo(completed: Boolean){
+    this.todos.forEach((todo: todo) => todo.completed = completed);
+  }
+  
   private getFilteredTodos(completed: Boolean){
     return this.todos
       .filter((todo: todo) => todo.completed == completed);
