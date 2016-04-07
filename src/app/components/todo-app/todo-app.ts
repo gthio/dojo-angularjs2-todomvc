@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core';
 import {Http} from 'angular2/http';
+import {RouteParams} from 'angular2/router';
 import {todo} from './todo';
 import {todoStore} from './todoStore';
 
@@ -13,11 +14,15 @@ import {todoStore} from './todoStore';
 })
 export class ToDoApp {
 
+  routeParams;
   todoStore: todoStore;
   newText = '';
 
-  constructor(todoStore: todoStore) {
-    this.todoStore = todoStore;
+  constructor(todoStore: todoStore,
+    routeParams: RouteParams) {
+      
+      this.todoStore = todoStore;
+      this.routeParams = routeParams;
   }
   
   addTodo(){
@@ -70,4 +75,45 @@ export class ToDoApp {
   getCompleted(){
     this.todoStore.getCompleted();
   }
+  
+  getViewMode(){
+    
+    var mode = "all";
+    var value = this.routeParams.get('status'); 
+
+    if (value == "active" ||
+      value == "completed"){
+      
+      mode = value;    
+    }    
+    
+    return mode;
+  }
+  
+  getCollectionByCompletion(completed: Boolean){
+    
+    if (completed == null){
+      return this.todoStore.todos;
+    }
+    else if (completed){
+      return this.todoStore.getCompleted();
+    }
+   
+    return this.todoStore.getRemaining();
+  }
+  
+  getCompletionStatusFilter(){
+    
+    var mode = null;
+    var value = this.routeParams.get('status'); 
+
+    if (value == "active") {
+      mode = false;
+    } 
+    else if (value == "completed"){
+      mode = true;    
+    }    
+    
+    return mode;
+  }  
 }

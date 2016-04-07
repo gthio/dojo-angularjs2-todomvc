@@ -11,7 +11,8 @@ import {ToDoApp} from './components/todo-app/todo-app';
   templateUrl: 'app/main-app.html',
 })
 @RouteConfig([
-  { path: '/home',       component: ToDoApp,     name: 'ToDoApp', useAsDefault: true },
+  { path: '/',        component: ToDoApp,     name: 'ToDoApp', useAsDefault: true },
+  { path: '/:status', component: ToDoApp,     name: 'ToDoApp'},
 ])
 export class MainApp {
 

@@ -17,7 +17,7 @@
       Mark all as complete
     </label>
     <ul class="todo-list">
-      <li *ngFor="#todo of todoStore.todos" [class.completed]="todo.completed" [class.editing]="todo.editing">
+      <li *ngFor="#todo of getCollectionByCompletion(getCompletionStatusFilter()) " [class.completed]="todo.completed" [class.editing]="todo.editing">
         <div class="view">
           <input class="toggle" type="checkbox" [checked]="todo.completed" 
             (click)="toggleCompletion(todo)" >    
@@ -42,13 +42,13 @@
     </span>
     <ul class="filters">
       <li>
-        <a href="#/" class="selected">All</a>
+        <a href="#/" [class.selected]="getCompletionStatusFilter()==null">All</a>
       </li>
       <li>
-        <a href="#/active">Active</a>
+        <a href="#/active" [class.selected]="getCompletionStatusFilter()==false">Active</a>
       </li>
       <li>
-        <a href="#/completed">Completed</a>
+        <a href="#/completed" [class.selected]="getCompletionStatusFilter()==true">Completed</a>
       </li>
     </ul>
     <button class="clear-completed" *ngIf="todoStore.getCompleted().length > 0" (click)="removeCompleted()">
