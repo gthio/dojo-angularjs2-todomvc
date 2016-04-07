@@ -10,7 +10,6 @@
   
   <section class="main" *ngIf="getByCompletion(null).length > 0">
     <input #toggleall class="toggle-all" type="checkbox" *ngIf="getByCompletion(null).length > 0" 
-      [checked]="getByCompletion(true)" 
       (click)="setAllTo(toggleall.checked)">
 
     <label for="toggle-all">
