@@ -72,6 +72,10 @@ export class ToDoApp {
     this.todoStore.toggleCompletion(todo);
   }
   
+  setAllTo(completed: Boolean){
+    this.todoStore.setAllTo(completed);
+  }
+  
   getCompleted(){
     this.todoStore.getCompleted();
   }
@@ -90,7 +94,7 @@ export class ToDoApp {
     return mode;
   }
   
-  getCollectionByCompletion(completed: Boolean){
+  getByCompletion(completed: Boolean){
     
     if (completed == null){
       return this.todoStore.todos;
@@ -102,7 +106,7 @@ export class ToDoApp {
     return this.todoStore.getRemaining();
   }
   
-  getCompletionStatusFilter(){
+  getCompletionFilter(){
     
     var mode = null;
     var value = this.routeParams.get('status'); 

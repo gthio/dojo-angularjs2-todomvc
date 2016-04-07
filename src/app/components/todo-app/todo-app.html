@@ -8,16 +8,16 @@
       (keyup.enter)="addTodo()">
   </header>
   
-  <section class="main" *ngIf="todoStore.todos.length > 0">
-    <input #toggleall class="toggle-all" type="checkbox" *ngIf="todoStore.todos.length > 0" 
-      [checked]="todoStore.allCompleted()" 
-      (click)="todoStore.setAllTo(toggleall.checked)">
+  <section class="main" *ngIf="getByCompletion(null).length > 0">
+    <input #toggleall class="toggle-all" type="checkbox" *ngIf="getByCompletion(null).length > 0" 
+      [checked]="getByCompletion(true)" 
+      (click)="setAllTo(toggleall.checked)">
 
     <label for="toggle-all">
       Mark all as complete
     </label>
     <ul class="todo-list">
-      <li *ngFor="#todo of getCollectionByCompletion(getCompletionStatusFilter()) " [class.completed]="todo.completed" [class.editing]="todo.editing">
+      <li *ngFor="#todo of getByCompletion(getCompletionFilter()) " [class.completed]="todo.completed" [class.editing]="todo.editing">
         <div class="view">
           <input class="toggle" type="checkbox" [checked]="todo.completed" 
             (click)="toggleCompletion(todo)" >    
@@ -36,22 +36,22 @@
     </ul>
   </section>
   
-  <footer class="footer" *ngIf="todoStore.todos.length > 0">
+  <footer class="footer" *ngIf="getByCompletion(null).length > 0">
     <span class="todo-count">
-      {{todoStore.getRemaining().length}} item(s) left
+      {{getByCompletion(false).length}} item(s) left
     </span>
     <ul class="filters">
       <li>
-        <a href="#/" [class.selected]="getCompletionStatusFilter()==null">All</a>
+        <a href="#/" [class.selected]="getCompletionFilter()==null">All</a>
       </li>
       <li>
-        <a href="#/active" [class.selected]="getCompletionStatusFilter()==false">Active</a>
+        <a href="#/active" [class.selected]="getCompletionFilter()==false">Active</a>
       </li>
       <li>
-        <a href="#/completed" [class.selected]="getCompletionStatusFilter()==true">Completed</a>
+        <a href="#/completed" [class.selected]="getCompletionFilter()==true">Completed</a>
       </li>
     </ul>
-    <button class="clear-completed" *ngIf="todoStore.getCompleted().length > 0" (click)="removeCompleted()">
+    <button class="clear-completed" *ngIf="getByCompletion(true).length > 0" (click)="removeCompleted()">
       Clear completed
     </button>
   </footer>
