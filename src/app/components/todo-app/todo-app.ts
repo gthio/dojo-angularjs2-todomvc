@@ -38,4 +38,8 @@ export class ToDoApp {
   toggleCompletion(todo: todo){
     this.todoStore.toggleCompletion(todo);
   }
+  
+  getCompleted(){
+    this.todoStore.getCompleted();
+  }
 }

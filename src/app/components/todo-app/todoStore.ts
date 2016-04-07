@@ -19,7 +19,7 @@ export class todoStore{
   }
   
   removeCompleted(){
-    this.todos = this.getFilteredTodos(true);
+    this.todos = this.getFilteredTodos(false);
   }
   
   toggleCompletion(todo: todo){
@@ -28,6 +28,10 @@ export class todoStore{
   
   getRemaining(){
     return this.getFilteredTodos(false);
+  }
+  
+  getCompleted(){
+    return this.getFilteredTodos(true);
   }
   
   private getFilteredTodos(completed: Boolean){
