@@ -27,6 +27,34 @@ export class ToDoApp {
     }
   }
   
+  editTodo(todo: todo){
+    todo.editing = true;
+  }
+  
+  cancelEditing(todo: todo){
+    todo.editing = false;
+  }
+  
+  stopEditing(todo: todo, 
+    editedTitle: String){
+      
+      todo.title = editedTitle;
+      todo.editing = false;    
+  }
+  
+  updateEditing(todo: todo,
+    editedTitle: String){
+      
+      editedTitle = editedTitle.trim();
+      todo.editing = true;
+      
+      if (editedTitle.length == 0){
+        return this.todoStore.remove(todo);
+      }
+      
+      todo.title = editedTitle;
+  }
+  
   remove(todo: todo){
     this.todoStore.remove(todo);
   }
